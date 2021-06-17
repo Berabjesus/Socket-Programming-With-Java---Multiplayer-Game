@@ -1,14 +1,17 @@
 package gui;
 
-import Game.Game;
+import game.Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class GameGui extends JPanel {
     private Game game;
     public GameGui(Game game) {
         this.game = game;
+        addMouseListener(new Input());
     }
 
     @Override
@@ -25,8 +28,19 @@ public class GameGui extends JPanel {
             for (int y = 0; y < 3; y++){
                 int cell = game.getCells()[x][y];
                 if (cell != 0)
-                    graphics2D.drawImage(Resources.letters[cell], Game.CELL -10, Game.CELL -10, null );
+                    graphics2D.drawImage(Resources.letters[cell - 1],x * Game.CELL, y * Game.CELL, Game.CELL -10, Game.CELL -10, null );
+            }
+        }
+    }
+
+    class Input extends MouseAdapter {
+        @Override
+        public void mousePressed(MouseEvent e) {
+            if (e.getButton() == MouseEvent.BUTTON1){
+                game.inputRecieved(e.getY() / Game.CELL, e.getX() / Game.CELL);
             }
         }
     }
 }
+
+
