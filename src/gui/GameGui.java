@@ -37,7 +37,7 @@ public class GameGui extends JPanel {
         @Override
         public void mousePressed(MouseEvent e) {
             if (e.getButton() == MouseEvent.BUTTON1){
-                game.inputRecieved(e.getY() / Game.CELL, e.getX() / Game.CELL);
+                game.inputRecieved(e.getX() / Game.CELL, e.getY() / Game.CELL);
             }
         }
     }

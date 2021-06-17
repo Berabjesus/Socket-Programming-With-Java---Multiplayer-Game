@@ -2,11 +2,9 @@ package clientServer;
 
 import game.Game;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.ObjectStreamException;
+import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class Connect implements Runnable{
     private ObjectOutputStream outputStream;
@@ -32,14 +30,19 @@ public class Connect implements Runnable{
             try {
                 Object object = inputStream.readObject();
                 game.packetRecieved(object);
+            } catch (EOFException | SocketException | NullPointerException e){
+                e.printStackTrace();
+                running = false;
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
+                running = false;
             }
         }
     }
 
     public void sendPacket (Object object){
         try {
+            outputStream.reset();
             outputStream.writeObject(object);
             outputStream.flush();
         } catch (IOException e) {
@@ -48,6 +51,7 @@ public class Connect implements Runnable{
     }
 
     public void close() throws IOException {
+        System.out.println("close");
         running = false;
         inputStream.close();
         outputStream.close();

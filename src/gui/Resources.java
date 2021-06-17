@@ -15,7 +15,6 @@ public class Resources {
 
     private static BufferedImage loadImage (String path) {
         try {
-            System.out.println("test");
             return ImageIO.read(new File(path));
         } catch (IOException e) {
             e.printStackTrace();
