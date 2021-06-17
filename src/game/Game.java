@@ -7,6 +7,7 @@ public abstract class Game {
     private Window window;
     private GameGui gameGui;
     private int[][] cells;
+    public final int PORT = 4000;
     public static final int WIDTH = 600;
     public static final int HEIGHT = 600;
     public static final int CELL = WIDTH / 3;
@@ -23,6 +24,8 @@ public abstract class Game {
     }
 
     public abstract void close();
+
+    public abstract void packetRecieved(Object object);
 
     public abstract void inputRecieved(int x, int y);
 }

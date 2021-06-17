@@ -3,29 +3,20 @@ package clientServer;
 import game.Game;
 
 import java.io.IOException;
-import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server extends Game {
+public class Client extends Game {
 
-    private ServerSocket serverSocket;
     private Socket socket;
     private Connect conn;
-    public Server() {
+
+    public Client (){
         try {
-            serverSocket = new ServerSocket(PORT);
-            socket = serverSocket.accept();
+            socket = new Socket("localhost", PORT);
             conn = new Connect(this, socket);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Port " + PORT + " is not open");
-            System.exit(-1);
         }
-    }
-
-    @Override
-    public void inputRecieved(int x, int y) {
-        System.out.println(x + "   " + y);
     }
 
     @Override
@@ -34,10 +25,15 @@ public class Server extends Game {
     }
 
     @Override
+    public void inputRecieved(int x, int y) {
+
+    }
+
+    @Override
     public void close() {
         try {
             conn.close();
-            serverSocket.close();
+            socket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
