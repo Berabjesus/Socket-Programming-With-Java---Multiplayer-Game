@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Tic Tac Toe multiplayer:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Tic_Tac_Toe_multiplayer_jar</output-path>
+    <root id="archive" name="Tic Tac Toe multiplayer.jar">
+      <element id="module-output" name="Tic Tac Toe multiplayer" />
+    </root>
+  </artifact>
+</component>
